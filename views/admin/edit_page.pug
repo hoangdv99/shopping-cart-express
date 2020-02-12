@@ -1,0 +1,18 @@
+extends ../layouts/admin.layout.pug
+block content
+    h2.page-title Edit a page
+
+    form(action="/admin/page/edit-page/"+slug, method="POST")
+        .form-group
+            label(for="title") Title
+            input#title.form-control(type="text", name="title")
+        .form-group
+            label(for="slug") Slug
+            input#slug.form-control(type="text", name="slug")      
+        .form-group
+            label(for="content") Content
+            textarea#content.form-control(name="content", cols="30", rows="7")
+        input(type="hidden", name="id", value= id)
+        button.btn.btn-primary Submit
+    block footer
+    
