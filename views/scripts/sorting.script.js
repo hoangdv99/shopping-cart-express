@@ -4,7 +4,6 @@ $('tbody').sortable({
     update: function(){
       var ids = $('tbody').sortable("serialize");
       var url = "/admin/page/reorder-pages";
-      console.log(ids);
       $.post(url, ids);
     }
   })

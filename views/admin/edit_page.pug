@@ -1,18 +1,24 @@
 extends ../layouts/admin.layout.pug
 block content
     h2.page-title Edit a page
-
+    br
+    if errors
+        each error in errors
+            .alert.alert-danger= error
+    
     form(action="/admin/page/edit-page/"+slug, method="POST")
+        input(type="hidden", name="id", value= id)
         .form-group
             label(for="title") Title
-            input#title.form-control(type="text", name="title")
+            input#title.form-control(type="text", name="title", value=values?values.title:'')
         .form-group
             label(for="slug") Slug
-            input#slug.form-control(type="text", name="slug")      
+            input#slug.form-control(type="text", name="slug", value=values?values.slug:'')      
         .form-group
             label(for="content") Content
             textarea#content.form-control(name="content", cols="30", rows="7")
-        input(type="hidden", name="id", value= id)
+        
         button.btn.btn-primary Submit
+    
     block footer
     
