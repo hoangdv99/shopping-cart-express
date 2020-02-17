@@ -17,4 +17,7 @@ router.post('/reorder-pages', controller.postReorderPages);
 router.get('/edit-page/:slug', controller.getEditPage);
 
 router.post('/edit-page/:slug', controller.postEditPage);
+
+router.get('/delete-page/:id', controller.deletePage);
+
 module.exports = router;

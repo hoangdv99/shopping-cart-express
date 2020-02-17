@@ -1,6 +1,6 @@
 const express = require('express');
 const app = express();
-const port = 3003;
+const port = 3000;
 const path = require('path');
 const mongoose = require('mongoose');
 const config = require('./config/database'); 
@@ -9,6 +9,10 @@ var session = require('express-session');
 
 //connect to mongodb
 mongoose.connect(config.database, {useNewUrlParser: true});
+mongoose.set('useNewUrlParser', true);
+mongoose.set('useFindAndModify', false);
+mongoose.set('useCreateIndex', true);
+mongoose.set('useUnifiedTopology', true);
 var db = mongoose.connection;
 db.on('error', console.error.bind(console, 'connection error:'));
 db.once('open', function() {
@@ -39,10 +43,13 @@ app.set('views', './views');
 app.use(express.static('public'));
 
 //set routes
-var page = require('./routes/page');
-var adminPage = require('./routes/admin_page');
+var page = require('./routes/page.route');
+var adminPage = require('./routes/admin_page.route');
+var adminCategories = require('./routes/admin_categories.route');
 app.use('/', page);
 app.use('/admin/page', adminPage);
+app.use('/admin/categories', adminCategories);
+
 
 //start server
 app.listen(port, () => console.log(`App listening on ${port}`));

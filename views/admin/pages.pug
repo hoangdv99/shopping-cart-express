@@ -3,7 +3,7 @@ block content
     h2.page-title Pages
     a.btn.btn-primary(href="/admin/page/add-page") Add a new page
     br
-    table.table.table-striped
+    table.table.table-striped.sorting
         thead
             tr.home
                 th Title
@@ -19,7 +19,7 @@ block content
                   td
                 if page.slug !== "home"
                   td
-                    a(href="/admin/page/delete-page/"+page._id) Delete
+                    a(href="/admin/page/delete-page/"+page._id, class="confirmDelete") Delete
     script(src="https://code.jquery.com/ui/1.12.1/jquery-ui.min.js")
     script
       include ../scripts/sorting.script.js

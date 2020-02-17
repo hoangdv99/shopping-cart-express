@@ -15,13 +15,13 @@ module.exports.getAddPage = (req, res)=>{
     })
 }
 
- module.exports.postAddPage = (req, res) => {
+ module.exports.postAddPage = async function(req, res){
     var title = req.body.title;
-    var slug = req.body.slug;
+    var slug = req.body.slug.replace(/\s+/g, '-').toLowerCase();
     var content = req.body.content;
     var errors = [];
     
-    slug = slug.replace(/\s+/g, '-').toLowerCase();
+    
     if(slug == ""){
         slug = title.replace(/\s+/g, '-').toLowerCase();
     }
@@ -30,11 +30,11 @@ module.exports.getAddPage = (req, res)=>{
         errors.push('Title is required!');
     }
 
-    var existedPage = Page.find({slug: slug});
+    var existedPage = await Page.findOne({slug: slug});
     if(existedPage){
-        errors.push('Slug existed. Choose another!');
+        errors.push("Existed slug. Choose another!");
     }
-
+    
     if(!content){
         errors.push('Content is required!');
     }
@@ -67,9 +67,8 @@ module.exports.getAddPage = (req, res)=>{
      })
  }
 
- module.exports.postReorderPages = function(req, res){
-     var ids = req.body['id[]'];
-     console.log(req.body);    
+ module.exports.postReorderPages = (req, res)=>{
+     var ids = req.body['id[]'];  
      var count = 0;
 
      for(var i=0; i<ids.length; i++){
@@ -142,5 +141,12 @@ module.exports.getEditPage = (req, res) => {
             res.redirect('/admin/page/pages');
         })
     }
-
  }
+
+module.exports.deletePage = (req, res)=>{
+    Page.findByIdAndRemove(req.params.id, err=>{
+        if(err) return console.log(err);
+        else
+            res.redirect('/admin/page/pages');
+    })
+}
