@@ -14,9 +14,9 @@ block content
               tr
                 td= category.title
                 td
-                    a(href="/admin/categories/edit-category/"+category.slug) Edit
+                    a(href="/admin/categories/edit-category/"+category.id) Edit
                 td
-                    a(href="/admin/category/delete-category/"+category._id, class="confirmDelete") Delete  
+                    a(href="/admin/categories/delete-category/"+category._id, class="confirmDelete") Delete  
     block footer
     
     

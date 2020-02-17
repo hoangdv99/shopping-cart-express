@@ -67,20 +67,16 @@ module.exports.getAddPage = (req, res)=>{
      })
  }
 
- module.exports.postReorderPages = (req, res)=>{
+ module.exports.postReorderPages = async function(req, res){
      var ids = req.body['id[]'];  
      var count = 0;
 
      for(var i=0; i<ids.length; i++){
          var id = ids[i];
          count++;
-
-         Page.findById(id, (err, page)=>{
-             page.sorting = count;
-             page.save(err=>{
-                 if(err) console.log(err);
-             });
-         });
+         var existedPage = await Page.findById(id);
+         existedPage.sorting = count;
+         existedPage.save();
      }
  };
 
