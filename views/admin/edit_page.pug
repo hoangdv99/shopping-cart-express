@@ -6,8 +6,7 @@ block content
         each error in errors
             .alert.alert-danger= error
     
-    form(action="/admin/page/edit-page/"+slug, method="POST")
-        input(type="hidden", name="id", value= id)
+    form(action="/admin/page/edit-page/"+id, method="POST")
         .form-group
             label(for="title") Title
             input#title.form-control(type="text", name="title", value=values?values.title:'')

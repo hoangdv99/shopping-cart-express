@@ -14,7 +14,7 @@ block content
               tr(id=page._id, class=page.slug)
                 td= page.title
                 td
-                  a(href="/admin/page/edit-page/"+page.slug) Edit
+                  a(href="/admin/page/edit-page/"+page.id) Edit
                 if page.slug === "home"
                   td
                 if page.slug !== "home"

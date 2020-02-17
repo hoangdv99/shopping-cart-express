@@ -2,7 +2,6 @@ const express = require('express');
 const router = express.Router();
 const controller = require('../controllers/admin_page.controller');
 
-var page = require('../models/page');
 
 router.get('/admin', controller.admin);
 
@@ -14,9 +13,9 @@ router.get('/pages', controller.getPagesIndex);
 
 router.post('/reorder-pages', controller.postReorderPages);
 
-router.get('/edit-page/:slug', controller.getEditPage);
+router.get('/edit-page/:id', controller.getEditPage);
 
-router.post('/edit-page/:slug', controller.postEditPage);
+router.post('/edit-page/:id', controller.postEditPage);
 
 router.get('/delete-page/:id', controller.deletePage);
 

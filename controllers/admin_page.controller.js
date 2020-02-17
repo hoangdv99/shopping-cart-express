@@ -21,7 +21,6 @@ module.exports.getAddPage = (req, res)=>{
     var content = req.body.content;
     var errors = [];
     
-    
     if(slug == ""){
         slug = title.replace(/\s+/g, '-').toLowerCase();
     }
@@ -81,7 +80,7 @@ module.exports.getAddPage = (req, res)=>{
  };
 
 module.exports.getEditPage = (req, res) => {
-    Page.findOne({ slug: req.params.slug }, (err, page) => {
+    Page.findById(req.params.id, (err, page) => {
         if(err) return console.log(err);
         res.render('admin/edit_page', {
             title: page.title,
@@ -96,7 +95,7 @@ module.exports.getEditPage = (req, res) => {
     var title = req.body.title;
     var slug = req.body.slug;
     var content = req.body.content;
-    var id = req.body.id;
+    var id = req.params.id;
     var errors = [];
     
     slug = slug.replace(/\s+/g, '-').toLowerCase();
