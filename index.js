@@ -5,6 +5,7 @@ const path = require('path');
 const mongoose = require('mongoose');
 const config = require('./config/database'); 
 const bodyParser = require('body-parser');
+var fileUpload = require('express-fileupload');
 var session = require('express-session');
 
 //connect to mongodb
@@ -33,7 +34,8 @@ app.use(session({
   cookie: { secure: true }
 }));
 
-
+//fileupload middleware
+app.use(fileUpload());
 
 //View engine setup
 app.set('view engine', 'pug');
@@ -46,10 +48,11 @@ app.use(express.static('public'));
 var page = require('./routes/page.route');
 var adminPage = require('./routes/admin_page.route');
 var adminCategories = require('./routes/admin_categories.route');
+var adminProducts = require('./routes/admin_products.route');
 app.use('/', page);
 app.use('/admin/page', adminPage);
 app.use('/admin/categories', adminCategories);
-
+app.use('/admin/products', adminProducts);
 
 //start server
 app.listen(port, () => console.log(`App listening on ${port}`));

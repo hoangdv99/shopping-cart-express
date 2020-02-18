@@ -1,3 +1,4 @@
+
 $(function(){
     if($('textarea#ta').length){
         CKEDITOR.replace('ta');
@@ -7,3 +8,4 @@ $(function(){
             return false;
     })
 })
+

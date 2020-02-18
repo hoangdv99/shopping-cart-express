@@ -4,3 +4,7 @@ body {
     padding-bottom: 5rem;
     padding-left: 5rem;
   }
+
+#imgPreview{
+  margin: 20px;
+}

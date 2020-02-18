@@ -1,0 +1,35 @@
+extends ../layouts/admin.layout.pug    
+block content
+    h2.page-title Products
+    a.btn.btn-primary(href="/admin/products/add-product") Add a new product
+    br
+    if count > 0    
+        table.table.table-striped
+            thead
+                tr
+                    th Product
+                    th Price
+                    th Category
+                    th Product image
+                    th Edit
+                    th Delete
+            tbody
+            each product in products
+                tr
+                    td= product.title
+                    td= parseFloat(product.price).toFixed(2)
+                    td= product.category
+                    td
+                        if product.image== ""
+                            img(src="/images/noimage.png", alt="")
+                        else
+                            img(src="/product_images/"+product._id+"/"+product.image)
+                    td
+                        a(href="/admin/products/edit-product/"+products.id) Edit
+                    td
+                        a(href="/admin/products/delete-product/"+product._id, class="confirmDelete") Delete  
+    else
+        h3.text-center There are no products.
+    block footer
+    
+    
