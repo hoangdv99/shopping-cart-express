@@ -62,12 +62,12 @@ module.exports.postAddProduct = function(req, res){
         
         mkdirp(`public/product_images/${product._id}`);
 
-        mkdirp(`public/product_images/${product._id}/gallery`);
+        //mkdirp(`public/product_images/${product._id}/gallery`);
 
-        mkdirp(`public/product_images/${product._id}/gallery/thumbs`);
+        //mkdirp(`public/product_images/${product._id}/gallery/thumbs`);
         if(imageFile !== ""){
             var productImage = req.files.image;
-            var path = `public/product_images/${product._id}/${imageFile}`;
+            var path = `public/product_images/${product._id}`;
             productImage.mv(path);
         }
         res.redirect('/admin/products');

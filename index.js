@@ -8,6 +8,7 @@ const bodyParser = require('body-parser');
 var fileUpload = require('express-fileupload');
 var session = require('express-session');
 
+app.use(fileUpload());
 //connect to mongodb
 mongoose.connect(config.database, {useNewUrlParser: true});
 mongoose.set('useNewUrlParser', true);
@@ -34,8 +35,6 @@ app.use(session({
   cookie: { secure: true }
 }));
 
-//fileupload middleware
-app.use(fileUpload());
 
 //View engine setup
 app.set('view engine', 'pug');

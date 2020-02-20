@@ -25,11 +25,11 @@ module.exports.postAddProduct = async function(req, res, next){
     var title = req.body.title;
     var desc = req.body.desc;
     var price = req.body.price;
-    if(!req.files){
+    if(!req.file){
         var imageFile = "";
     }
-    if(req.files){
-        var imageFile = typeof req.files.image !== "undefined" ? req.files.image.name : "";
+    if(req.file){
+        var imageFile = typeof req.file.image !== "undefined" ? req.file.image.name : "";
     }
     var errors = [];
     
