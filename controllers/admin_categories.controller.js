@@ -16,32 +16,16 @@ module.exports.getAddCategory = (req, res)=>{
     });
 };
 
-module.exports.postAddCategory = async function(req, res){
+module.exports.postAddCategory = function(req, res){
     var title = req.body.title;
     var slug = title.replace(/\s+/g, '-').toLowerCase();
-    var errors = [];
-    
-    if(!title){
-        errors.push('Title is required!');
-    }
-    var existedCategory = await Category.findOne({slug: slug});
-    if(existedCategory){
-        errors.push("Category existed!");
-    }
-    if(errors.length){
-        res.render('admin/add_category', {
-            errors: errors
-        })
-        return;
-    }
-    if(errors.length === 0){
-        var category = new Category({
-            title : title,
-            slug: slug
-        })
-        category.save();
-        res.redirect('/admin/categories');
-    }
+
+    var category = new Category({
+        title : title,
+        slug: slug
+    })
+    category.save();
+    res.redirect('/admin/categories');
  }
 
 module.exports.getEditCategory = (req, res) => {
@@ -54,37 +38,19 @@ module.exports.getEditCategory = (req, res) => {
     });
 }
 
-module.exports.postEditCategory = async (req, res) => {
+module.exports.postEditCategory = (req, res) => {
     var title = req.body.title;
     var id = req.params.id;
     var slug = title.replace(/\s+/g, '-').toLowerCase();
-    var errors = [];
-    if (!title) {
-        errors.push('Title is required!');
-    }
 
-    var existedCategory = await Category.findOne({slug: slug, _id: {'$ne': id}});
-    if(existedCategory){
-        errors.push('Existed category. Choose another!');
-    }
-
-    if (errors.length) {
-        res.render('admin/edit_category', {
-            errors: errors,
-            title: title,
-            id: id
-        })
-        return;
-    }
-    if (!errors.length) {
-        Category.findById(id, (err, category) => {
-            if (err) return console.log(err);
-            category.title = title;
-            category.slug = slug;
-            category.save();
-            res.redirect('/admin/categories');
-        })
-    }
+    Category.findById(id, (err, category) => {
+        if (err) return console.log(err);
+        category.title = title;
+        category.slug = slug;
+        category.save();
+        res.redirect('/admin/categories');
+    })
+    
 }
 
 module.exports.deleteCategory = (req, res)=>{

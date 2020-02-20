@@ -14,20 +14,21 @@ block content
                     th Edit
                     th Delete
             tbody
-            each product in products
-                tr
-                    td= product.title
-                    td= parseFloat(product.price).toFixed(2)
-                    td= product.category
-                    td
-                        if product.image== ""
-                            img(src="/images/noimage.png", alt="")
+                each product in products
+                    tr
+                        td= product.title
+                        td= parseFloat(product.price).toFixed(2)
+                        td= product.category
+                        if product.image === ""
+                            td
+                                img#image(src="/images/noimage.png")
                         else
-                            img(src="/product_images/"+product._id+"/"+product.image)
-                    td
-                        a(href="/admin/products/edit-product/"+products.id) Edit
-                    td
-                        a(href="/admin/products/delete-product/"+product._id, class="confirmDelete") Delete  
+                            td
+                                img#image(src="/product_images/"+product._id+"/"+product.image)
+                        td
+                            a(href="/admin/products/edit-product/"+products.id) Edit
+                        td
+                            a(href="/admin/products/delete-product/"+product._id, class="confirmDelete") Delete  
     else
         h3.text-center There are no products.
     block footer
