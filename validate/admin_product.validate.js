@@ -75,3 +75,57 @@ module.exports.postAddProduct = async function(req, res, next){
     }
     next();
 };
+
+module.exports.postEditProduct = async (req, res, next)=>{
+    var title = req.body.title;
+    var desc = req.body.desc;
+    var price = req.body.price;
+    if(!req.files){
+        var imageFile = "";
+    }
+    if(req.files){
+        var imageFile = typeof req.files.image !== "undefined" ? req.files.image.name : "";
+    }
+    var errors = [];
+    var slug = req.body.title.replace(/\s+/g, '-').toLowerCase();
+    var id = req.params.id;
+    if(!title){
+        errors.push('Title is required!');
+    }
+    
+    if(!desc){
+        errors.push('Description is required!');
+    }
+
+    if(!price){
+        errors.push('Price is required!');
+    } else if(isDecimal(price) == false){
+        errors.push('Price must be a number!');
+    }
+
+    if(isImage(imageFile) == false && imageFile !== ""){
+        errors.push('An image is required!');
+    }
+
+    Product.findOne({slug: slug, _id: {'$ne': id}}, (err, p)=>{
+        if(err) console.log(err);
+        if(p){
+            errors.push('Product exists!');
+        }
+    })
+    if(errors.length){
+        Category.find((err, categories)=>{
+            res.render('admin/edit_product', {
+                errors: errors,
+                title: title,
+                desc: desc,
+                categories: categories,
+                price: price,
+                id: id
+            })
+        })
+        return;
+    }
+    next();
+
+}
