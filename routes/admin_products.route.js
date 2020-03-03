@@ -14,6 +14,8 @@ router.get('/edit-product/:id', controller.getEditProduct);
 
 router.post('/edit-product/:id', validate.postEditProduct, controller.postEditProduct);
 
-//router.post('/product-gallery/:id', validate.postEditProduct, controller.postGallery);
+router.post('/product-gallery/:id', controller.postGallery);
+
+router.get('/delete-image/:image', controller.deleteImage);
 
 module.exports = router;

@@ -107,7 +107,7 @@ module.exports.postEditProduct = async (req, res, next)=>{
         errors.push('An image is required!');
     }
 
-    Product.findOne({slug: slug, _id: {'$ne': id}}, (err, p)=>{
+    await Product.findOne({slug: slug, _id: {'$ne': id}}, (err, p)=>{
         if(err) console.log(err);
         if(p){
             errors.push('Product exists!');

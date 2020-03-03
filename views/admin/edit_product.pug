@@ -37,20 +37,20 @@ block content
     hr
     h3.page-header Gallery
     
-    //- ul.gallery
-    //-     each image in galleryImages
-    //-         if image !== "thumbs"
-    //-             li
-    //-                 img(src="/product_images/"+id+"gallery/thumbs/"+image)
-    //-                 a.confirmDeletion(href="/admin/products/delete-image/"+image+"?id="+id) Delete
-    //- link(rel="stylesheet", href="https://cdnjs.cloudflare.com/ajax/libs/dropzone/5.7.0/basic.css")
-    //- link(rel="stylesheet", href="https://cdnjs.cloudflare.com/ajax/libs/dropzone/5.7.0/dropzone.css")
-    //- script(src="https://cdnjs.cloudflare.com/ajax/libs/dropzone/5.7.0/dropzone-amd-module.js")
-    //- br
-    //- form#dropzone.dropzone(action="/admin/products/product-gallery/"+id, method="post", enctype="multipart/form-data")
-    //-     .fallback
-    //-         input(type="file", name="file", multiple)
-    //-         input(type="summit", value="Upload")
+    ul.gallery
+        each image in galleryImages
+            if image !== "thumbs"
+                li
+                    img(src="/product_images/"+id+"/gallery/thumbs/"+image)
+                    a.confirmDelete(href="/admin/products/delete-image/"+image+"?id="+id) Delete
+    link(rel="stylesheet", href="https://cdnjs.cloudflare.com/ajax/libs/dropzone/5.7.0/basic.css")
+    link(rel="stylesheet", href="https://cdnjs.cloudflare.com/ajax/libs/dropzone/5.7.0/dropzone.css")
+    script(src="https://cdnjs.cloudflare.com/ajax/libs/dropzone/5.7.0/dropzone-amd-module.js")
+    br
+    form#dropzone.dropzone(action="/admin/products/product-gallery/"+id, method="post", enctype="multipart/form-data")
+        .fallback
+            input(type="file", name="file", multiple)
+            input(type="summit", value="Upload")
     //Preview image
     script.
         function readURL(input){
@@ -66,15 +66,15 @@ block content
                  readURL(this); 
             });
         //dropzone
-        //- Dropzone.options.dropzoneForm = {
-        //-     acceptedFiles: "image/*",
-        //-     init: function(){
-        //-         this.on("queuecomplete", function(file){
-        //-             setTimeout(function(){
-        //-                 location.reload()
-        //-             }, 1000);
-        //-         });
-        //-     }
-        //- }
+        Dropzone.options.dropzoneForm = {
+            acceptedFiles: "image/*",
+            init: function(){
+                this.on("queuecomplete", function(file){
+                    setTimeout(function(){
+                        location.reload()
+                    }, 1000);
+                });
+            }
+        }
     block footer
     

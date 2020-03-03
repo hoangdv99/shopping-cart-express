@@ -152,19 +152,36 @@ module.exports.postEditProduct = (req, res)=>{
     });
     res.redirect('/admin/products');
 };
-// module.exports.postGallery = (req, res)=>{
-//     var productImage = req.files.file;
-//     var id = req.params.id;
-//     var path = `public/product_images/${id}/gallery/${productImage.name}`;
-//     var thumbsPath = `public/product_images/${id}/gallery/thumbs/${productImage.name}`;
 
-//     productImage.mv(path, err=>{
-//         if(err)
-//             console.log(err);
-//         resizeImg(fs.readFileSync(path), {width: 100, height: 100})
-//         .then(buf=>{
-//             fs.writeFileSync(thumbsPath, buf);
-//         });
-//     });
-//     res.sendStatus( 200 );
-// };
+module.exports.postGallery = (req, res)=>{
+    var productImage = req.files.file;
+    var id = req.params.id;
+    var path = `public/product_images/${id}/gallery/${productImage.name}`;
+    var thumbsPath = `public/product_images/${id}/gallery/thumbs/${productImage.name}`;
+
+    productImage.mv(path, err=>{
+        if(err)
+            console.log(err);
+        resizeImg(fs.readFileSync(path), {width: 100, height: 100})
+        .then(buf=>{
+            fs.writeFileSync(thumbsPath, buf);
+        });
+    });
+    res.sendStatus( 200 );
+};
+
+module.exports.deleteImage = (req, res)=>{
+    var originalImage = `public/product_images/${req.query.id}/gallery/${req.params.image}`;
+    var thumbImage = `public/product_images/${req.query.id}/gallery/thumbs/${req.params.image}`;
+
+    fs.remove(originalImage, err=>{
+        if(err) console.log(err);
+        else{
+            fs.remove(thumbImage, err=>{
+                if(err) console.log(err);
+                else
+                    res.redirect(`/admin/products/edit-product/${req.query.id}`);
+            });
+        }
+    })
+}
