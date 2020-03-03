@@ -18,4 +18,6 @@ router.post('/product-gallery/:id', controller.postGallery);
 
 router.get('/delete-image/:image', controller.deleteImage);
 
+router.get('/delete-product/:id', controller.deleteProduct);
+
 module.exports = router;

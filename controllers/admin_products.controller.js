@@ -185,3 +185,20 @@ module.exports.deleteImage = (req, res)=>{
         }
     })
 }
+
+module.exports.deleteProduct = (req, res)=>{
+    var id = req.params.id;
+    var path = `public/product_images/${id}`;
+
+    fs.remove(path, err=>{
+        if(err)
+            console.log(err);
+        else{
+            Product.findByIdAndRemove(id, err=>{
+                if(err)
+                    console.log(err);
+            });
+            res.redirect('/admin/products');
+        }
+    });
+};
