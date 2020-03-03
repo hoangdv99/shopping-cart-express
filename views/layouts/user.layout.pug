@@ -9,19 +9,14 @@ html
       button.navbar-toggler(type='button', data-toggle='collapse', data-target='#navbarsExampleDefault', aria-controls='navbarsExampleDefault', aria-expanded='false', aria-label='Toggle navigation')
         span.navbar-toggler-icon
       #navbarsExampleDefault.collapse.navbar-collapse
-        ul.navbar-nav.mr-auto
-          li.nav-item.active
-            a.nav-link(href='#')
-              | Home
-              span.sr-only (current)
-          li.nav-item
-            a.nav-link(href='#') Chat
-          li.nav-item
-            a.nav-link(href='#') Contact Us
-          li.nav-item
-            a.nav-link(href='#') Register
-          li.nav-item
-            a.nav-link(href='#') Login
+        ul(class="navbar-nav mr-auto")
+          each page in pages
+            if page.slug == "home"
+              li(class="nav-item")
+                a.nav-link(href="/")= page.title
+            else
+              li(class="nav-item")
+              a.nav-link(href= page.slug)= page.title
     .container.pt-5
     block content
     hr

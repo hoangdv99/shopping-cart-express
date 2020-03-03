@@ -1,7 +1,7 @@
 extends ../layouts/admin.layout.pug    
 block content
     h2.page-title Pages
-    a.btn.btn-primary(href="/admin/page/add-page") Add a new page
+    a.btn.btn-primary(href="/admin/pages/add-page") Add a new page
     br
     table.table.table-striped.sorting
         thead
@@ -14,12 +14,12 @@ block content
               tr(id=page._id, class=page.slug)
                 td= page.title
                 td
-                  a(href="/admin/page/edit-page/"+page.id) Edit
+                  a(href="/admin/pages/edit-page/"+page.id) Edit
                 if page.slug === "home"
                   td
                 if page.slug !== "home"
                   td
-                    a(href="/admin/page/delete-page/"+page._id, class="confirmDelete") Delete
+                    a(href="/admin/pages/delete-page/"+page._id, class="confirmDelete") Delete
     script(src="https://code.jquery.com/ui/1.12.1/jquery-ui.min.js")
     script
       include ../scripts/sorting.script.js

@@ -10,14 +10,14 @@ html
       a.navbar-brand(href='/') Shopping Pro
       button.navbar-toggler(type='button', data-toggle='collapse', data-target='#navbarsExampleDefault', aria-controls='navbarsExampleDefault', aria-expanded='false', aria-label='Toggle navigation')
         span.navbar-toggler-icon
-      #navbarsExampleDefault.collapse.navbar-collapse
-        ul.navbar-nav.mr-auto
-          li.nav-item
-            a.nav-link(href='/admin/page/pages') Pages
-          li.nav-item
-            a.nav-link(href='/admin/categories') Categories
-          li.nav-item
-            a.nav-link(href='/admin/products') Products
+      #navbar.collapse-navbar-collapse
+        ul(class="navbar-nav mr-auto")
+              li(class="nav-item")
+                a.nav-link(href= "/admin/pages") Pages
+              li(class="nav-item")
+                a.nav-link(href= "/admin/categories") Categories
+              li(class="nav-item")
+                a.nav-link(href= "/admin/products") Products
     .container.pt-5
     block content
     

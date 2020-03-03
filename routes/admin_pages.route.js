@@ -1,6 +1,6 @@
 const express = require('express');
 const router = express.Router();
-const controller = require('../controllers/admin_page.controller');
+const controller = require('../controllers/admin_pages.controller');
 const validate = require('../validate/admin_page.validate');
 
 router.get('/admin', controller.admin);
@@ -9,7 +9,7 @@ router.get('/add-page', controller.getAddPage);
 
 router.post('/add-page', validate.postAddPage, controller.postAddPage);
 
-router.get('/pages', controller.getPagesIndex);
+router.get('/', controller.getPagesIndex);
 
 router.post('/reorder-pages', controller.postReorderPages);
 

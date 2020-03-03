@@ -16,7 +16,7 @@ module.exports.postAddPage = async function(req, res, next){
 
     var existedPage = await Page.findOne({slug: slug});
     if(existedPage){
-        errors.push("Existed slug. Choose another!");
+        errors.push("Page is existing!");
     }
     
     if(!content){

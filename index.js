@@ -35,6 +35,15 @@ app.use(session({
   cookie: { secure: true }
 }));
 
+//get page model
+var Page = require('./models/page');
+Page.find({}).sort({sorting: 1}).exec((err, pages)=>{
+  if(err)
+    console.log(err);
+  else{
+    app.locals.pages = pages;
+  }
+});
 
 //View engine setup
 app.set('view engine', 'pug');
@@ -45,11 +54,11 @@ app.use(express.static('public'));
 
 //set routes
 var page = require('./routes/page.route');
-var adminPage = require('./routes/admin_page.route');
+var adminPages = require('./routes/admin_pages.route');
 var adminCategories = require('./routes/admin_categories.route');
 var adminProducts = require('./routes/admin_products.route');
 app.use('/', page);
-app.use('/admin/page', adminPage);
+app.use('/admin/pages', adminPages);
 app.use('/admin/categories', adminCategories);
 app.use('/admin/products', adminProducts);
 
