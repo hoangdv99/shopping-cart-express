@@ -29,3 +29,21 @@ ul.gallery li{
   display: inline-block;
   list-style: none;
 }
+
+img.pimage{
+  width: 120px;
+}
+
+a.pa{
+  display: inline-block;
+  height: 160px;
+}
+
+.col-xs-12 .col-md-4{
+  margin-top: 20px;
+  margin-bottom: 20px;
+}
+
+img.spi{
+  width: 100%;
+}

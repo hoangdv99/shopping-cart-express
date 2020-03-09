@@ -10,7 +10,7 @@ var session = require('express-session');
 
 app.use(fileUpload());
 //connect to mongodb
-mongoose.connect(config.database, {useNewUrlParser: true});
+mongoose.connect(config.database, {useNewUrlParser: true, useUnifiedTopology: true});
 mongoose.set('useNewUrlParser', true);
 mongoose.set('useFindAndModify', false);
 mongoose.set('useCreateIndex', true);
@@ -30,10 +30,12 @@ app.use(bodyParser.json());
 //express-session middleware
 app.use(session({
   secret: 'keyboard cat',
-  resave: false,
+  resave: true,
   saveUninitialized: true,
-  cookie: { secure: true }
+//  cookie: { secure: true }
 }));
+
+
 
 //get page model
 var Page = require('./models/page');
@@ -42,6 +44,17 @@ Page.find({}).sort({sorting: 1}).exec((err, pages)=>{
     console.log(err);
   else{
     app.locals.pages = pages;
+  }
+});
+
+//get categories
+var Category = require('./models/category');
+Category.find((err, categories)=>{
+  if(err){
+    console.log(err);
+  }
+  else{
+    app.locals.categories = categories;
   }
 });
 
@@ -54,13 +67,22 @@ app.use(express.static('public'));
 
 //set routes
 var page = require('./routes/page.route');
+var products = require('./routes/products.route');
+var cart = require('./routes/cart.route');
 var adminPages = require('./routes/admin_pages.route');
 var adminCategories = require('./routes/admin_categories.route');
 var adminProducts = require('./routes/admin_products.route');
+app.use('/cart', cart);
 app.use('/', page);
+app.use('/products', products);
 app.use('/admin/pages', adminPages);
 app.use('/admin/categories', adminCategories);
 app.use('/admin/products', adminProducts);
+
+app.get('*', (req, res, next)=>{
+  app.locals.cart = req.session.cart;
+  next();
+})
 
 //start server
 app.listen(port, () => console.log(`App listening on ${port}`));

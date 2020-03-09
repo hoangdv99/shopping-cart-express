@@ -1,11 +1,13 @@
+doctype html
 html
   head
     title Shopping Pro
+    link(rel="stylesheet", href="https://cdn.jsdelivr.net/gh/fancyapps/fancybox@3.5.7/dist/jquery.fancybox.min.css")
     link(rel="stylesheet", href="/style/custom.css")
     link(rel='stylesheet', href='https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css')
   body
     nav.navbar.navbar-expand-md.navbar-dark.bg-dark.fixed-top
-      a.navbar-brand(href='#') Shopping Pro
+      a.navbar-brand(href='/') Shopping Pro
       button.navbar-toggler(type='button', data-toggle='collapse', data-target='#navbarsExampleDefault', aria-controls='navbarsExampleDefault', aria-expanded='false', aria-label='Toggle navigation')
         span.navbar-toggler-icon
       #navbarsExampleDefault.collapse.navbar-collapse
@@ -17,9 +19,32 @@ html
             else
               li(class="nav-item")
               a.nav-link(href= page.slug)= page.title
+        ul(class="navbar-nav narbar-right mr-auto")
+          li(class="nav-item")
+            a.nav-link(href="/cart/checkout") My Cart
+              if typeof cart !== "undefined"
+                span= "("+cart.length+")"
+              else
+                span= " (0)"
     .container.pt-5
-    block content
+    .container
+      .row
+        div(class="col-xs-12 col-md-3")
+          h3 Categories
+          ul.list-group
+            li.list-group-item
+              a(href="/products") All products
+              each category in categories
+                li.list-group-item
+                  a(href="/products/"+category.slug)= category.title
+        div(class="col-xs-12 col-md-1")
+        div(class="col-xs-12 col-md-8")
+          block content
     hr
     p.text-center &COPY; Shopping Pro
+    script(src="https://cdn.jsdelivr.net/npm/jquery@3.4.1/dist/jquery.min.js")
+    script(src="https://cdn.jsdelivr.net/gh/fancyapps/fancybox@3.5.7/dist/jquery.fancybox.min.js")
+    script(src="https://cdn.ckeditor.com/4.13.1/standard/ckeditor.js")
+    script(src="/js/main.js")
         block footer
         

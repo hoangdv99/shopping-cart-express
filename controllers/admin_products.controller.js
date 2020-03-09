@@ -119,7 +119,7 @@ module.exports.postEditProduct = (req, res)=>{
     if(req.files){
         var imageFile = typeof req.files.image !== "undefined" ? req.files.image.name : "";
     }
-    console.log(imageFile);
+    
     var title = req.body.title;
     var slug = req.body.title.replace(/\s+/g, '-').toLowerCase();
     var category = req.body.category;

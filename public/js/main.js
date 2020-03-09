@@ -7,5 +7,7 @@ $(function(){
         if(!confirm('Confirm deletion'))
             return false;
     })
+    if($('[data-fancybox="gallery"]'))
+        $('[data-fancybox="gallery"]').fancybox();
 })
 

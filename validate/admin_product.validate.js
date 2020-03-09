@@ -1,7 +1,8 @@
 const path = require('path');
 const Category = require('../models/category');
 const Product = require('../models/product');
-
+var mkdirp = require('mkdirp');
+var fs = require('fs-extra');
 function isDecimal(n)
 {
     return !isNaN(parseFloat(n)) && isFinite(n);
@@ -113,6 +114,15 @@ module.exports.postEditProduct = async (req, res, next)=>{
             errors.push('Product exists!');
         }
     })
+    var galleryImages = null;
+    await Product.findById(req.params.id, (err, product)=>{
+        if(err){
+            console.log(err);
+        } else{
+            var galleryDir = `public/product_images/${product._id}/gallery`;
+            galleryImages = fs.readdir(galleryDir);
+        } 
+    });
     if(errors.length){
         Category.find((err, categories)=>{
             res.render('admin/edit_product', {
@@ -121,7 +131,8 @@ module.exports.postEditProduct = async (req, res, next)=>{
                 desc: desc,
                 categories: categories,
                 price: price,
-                id: id
+                id: id,
+                galleryImages: galleryImages
             })
         })
         return;

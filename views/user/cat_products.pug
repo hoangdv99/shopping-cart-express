@@ -1,0 +1,11 @@
+extends ../layouts/user.layout.pug
+block content
+    div(class="row products")
+        each product in products
+            div(class="col-xs-12 col-md-4")
+                a(class="pa", href="/products/"+product.category+"/"+product.slug)
+                    img(class="pimage", src="/product_images/"+product._id+"/"+product.image)
+                h3= product.title
+                h4= parseFloat(product.price).toFixed(2)+"$"
+                a(class="vd", href="/products/"+product.category+"/"+product.slug) View Details
+block footer

@@ -24,9 +24,21 @@ module.exports.postAddCategory = function(req, res){
         title : title,
         slug: slug
     })
-    category.save();
+    category.save(err=>{
+        if(err){
+            console.log(err);
+        }
+        Category.find((err, categories)=>{
+            if(err){
+              console.log(err);
+            }
+            else{
+              req.app.locals.categories = categories;
+            }
+        });
     res.redirect('/admin/categories');
- }
+ });
+};
 
 module.exports.getEditCategory = (req, res) => {
     Category.findById(req.params.id, (err, category) => {
@@ -47,7 +59,19 @@ module.exports.postEditCategory = (req, res) => {
         if (err) return console.log(err);
         category.title = title;
         category.slug = slug;
-        category.save();
+        category.save(err=>{
+            if(err){
+                console.log(err);
+            }
+            Category.find((err, categories)=>{
+                if(err){
+                  console.log(err);
+                }
+                else{
+                  req.app.locals.categories = categories;
+                }
+            });
+        });
         res.redirect('/admin/categories');
     })
     
@@ -56,7 +80,17 @@ module.exports.postEditCategory = (req, res) => {
 module.exports.deleteCategory = (req, res)=>{
     Category.findByIdAndRemove(req.params.id, err=>{
         if(err) return console.log(err);
-        else
+        
+        else{
+            Category.find((err, categories)=>{
+                if(err){
+                  console.log(err);
+                }
+                else{
+                  req.app.locals.categories = categories;
+                }
+            });
             res.redirect('/admin/categories');
+        }
     });
 };

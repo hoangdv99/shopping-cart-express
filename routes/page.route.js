@@ -4,6 +4,6 @@ const controller = require('../controllers/page.controller');
 
 router.get('/', controller.index);
 
-router.get('/test', controller.test);
+router.get('/:slug', controller.getAPage);
 
 module.exports = router;
