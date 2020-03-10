@@ -37,7 +37,16 @@ module.exports.addToCart = (req, res)=>{
                 });
             }
         }
-        console.log(typeof(cart));
         res.redirect('back');
+        //console.log(req.session.cart);
+        
     });
+    
 }
+
+module.exports.getCheckout = (req, res)=>{
+    res.render('user/checkout', {
+        title: 'Checkout',
+        cart: req.session.cart
+    });
+};

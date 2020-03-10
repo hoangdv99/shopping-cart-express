@@ -21,6 +21,8 @@ db.once('open', function() {
   console.log('Connected!');
 });
 
+
+
 // parse application/x-www-form-urlencoded
 app.use(bodyParser.urlencoded({ extended: true }));
 
@@ -65,6 +67,11 @@ app.set('views', './views');
 //set public folder
 app.use(express.static('public'));
 
+app.get('*', function(req, res, next){
+  res.locals.cart = req.session.cart;
+  next();
+});
+
 //set routes
 var page = require('./routes/page.route');
 var products = require('./routes/products.route');
@@ -79,10 +86,7 @@ app.use('/admin/pages', adminPages);
 app.use('/admin/categories', adminCategories);
 app.use('/admin/products', adminProducts);
 
-app.get('*', (req, res, next)=>{
-  app.locals.cart = req.session.cart;
-  next();
-})
 
 //start server
 app.listen(port, () => console.log(`App listening on ${port}`));
+

@@ -23,9 +23,10 @@ html
           li(class="nav-item")
             a.nav-link(href="/cart/checkout") My Cart
               if typeof cart !== "undefined"
-                span= "("+cart.length+")"
+                span= " ("+cart.length+")"
               else
                 span= " (0)"
+        
     .container.pt-5
     .container
       .row

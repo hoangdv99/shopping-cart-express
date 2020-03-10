@@ -5,7 +5,7 @@ block content
             div(class="col-xs-12 col-md-4")
                 a(class="pa", href="/products/"+product.category+"/"+product.slug)
                     img(class="pimage", scr="/product_images/"+product.id+"/"+product.image)
-                    h3= product.title
-                    h4= parseFloat(product.price).toFixed(2)+"$"
-                    a(class="vd", href="/products/"+product.category+"/"+product.slug) View Details
+                h3= product.title
+                h4= parseFloat(product.price).toFixed(2)+"$"
+                a(class="vd", href="/products/"+product.category+"/"+product.slug) View Details
 block footer

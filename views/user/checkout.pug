@@ -1,0 +1,27 @@
+extends ../layouts/user.layout.pug
+block content
+    if typeof cart !== 'undefined'
+        table(class="table table-striped")
+            tr
+                th Image
+                th Title
+                th Price
+                th Quantity
+                th
+                th Subtotal
+            each product in cart
+                tr
+                    td
+                        img(scr= product.image, class="cpi")
+                    td= product.title
+                    td= product.price+'$'
+                    td= product.quantity
+                    td
+                        a(href=`/cart/update/${product.title}?action=add`)
+                            button(class="button button-primary") Add
+                        a(href=`/cart/update/${product.title}?action=remove`)
+                        a(href=`/cart/update/${product.title}?action=clear`) 
+                    td= parseFloat(product.qty * product.price).toFixed(2)
+    else
+        h3.text-center Your cart is empty.
+block footer
