@@ -1,7 +1,8 @@
 extends ../layouts/user.layout.pug
 block content
+    h1.page-title My Cart
     if typeof cart !== 'undefined'
-        table(class="table table-striped")
+        table(class="table table-striped alignmiddle")
             tr
                 th Image
                 th Title
@@ -9,19 +10,35 @@ block content
                 th Quantity
                 th
                 th Subtotal
+            - var total = 0
             each product in cart
+                - total += product.price * product.qty
                 tr
                     td
-                        img(scr= product.image, class="cpi")
+                        img(src=product.image, class="cpi")
                     td= product.title
                     td= product.price+'$'
-                    td= product.quantity
+                    td= product.qty
                     td
                         a(href=`/cart/update/${product.title}?action=add`)
-                            button(class="button button-primary") Add
+                            button(class="button button-primary") +
                         a(href=`/cart/update/${product.title}?action=remove`)
+                            button(class="button button-primary") -
                         a(href=`/cart/update/${product.title}?action=clear`) 
-                    td= parseFloat(product.qty * product.price).toFixed(2)
+                            button(class="button button-primary") Clear
+                    td= parseFloat(product.qty * product.price).toFixed(2) + "$"
+                    td
+            tr 
+                td(colspan="6" align="right")
+                    b="Total: "+parseFloat(total).toFixed(2)+"$"
+            tr
+                td(colspan="5" align="right")
+                    a(class="btn btn-danger" href="/cart/clear") Clear cart
+                td(colspan="5" align="right")
+                    a(class="btn btn-primary buynow" href="#") Buy now
+                
     else
         h3.text-center Your cart is empty.
+    script. 
+          
 block footer

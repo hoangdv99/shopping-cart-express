@@ -7,4 +7,8 @@ router.get('/add/:product', controller.addToCart);
 
 //get checkout page
 router.get('/checkout', controller.getCheckout);
+
+//get update product
+router.get('/update/:product', controller.updateProduct);
+
 module.exports = router;

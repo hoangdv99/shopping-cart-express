@@ -50,4 +50,8 @@ img.spi{
 
 img.cpi{
   width: 100px;
+  height: 100px;
+}
+table.alignmiddle td{
+  vertical-align: middle;
 }
