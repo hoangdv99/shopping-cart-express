@@ -33,12 +33,19 @@ block content
                     b="Total: "+parseFloat(total).toFixed(2)+"$"
             tr
                 td(colspan="5" align="right")
-                    a(class="btn btn-danger" href="/cart/clear") Clear cart
+                    a(class="btn btn-danger confirmDelete" href="/cart/clear") Clear cart
                 td(colspan="5" align="right")
                     a(class="btn btn-primary buynow" href="#") Buy now
                 
     else
         h3.text-center Your cart is empty.
-    script. 
-          
+    script.
+        $(function(){
+            $('a.clearcart').on('click', fucntion(){
+                if(!confirm('Confirm Deletion')){
+                    return false;
+                }
+            })
+        })
+    
 block footer

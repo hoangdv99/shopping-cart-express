@@ -11,4 +11,6 @@ router.get('/checkout', controller.getCheckout);
 //get update product
 router.get('/update/:product', controller.updateProduct);
 
+//get clear cart
+router.get('/clear', controller.clearCart);
 module.exports = router;

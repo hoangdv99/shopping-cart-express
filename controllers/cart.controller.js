@@ -84,3 +84,8 @@ module.exports.updateProduct = (req, res)=>{
     }
     res.redirect('/cart/checkout');
 }
+
+module.exports.clearCart = (req, res)=>{
+    delete req.session.cart;
+    res.redirect('/cart/checkout');
+}
