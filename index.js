@@ -7,6 +7,7 @@ const config = require('./config/database');
 const bodyParser = require('body-parser');
 var fileUpload = require('express-fileupload');
 var session = require('express-session');
+var passport = require('passport');
 
 app.use(fileUpload());
 //connect to mongodb
@@ -21,7 +22,7 @@ db.once('open', function() {
   console.log('Connected!');
 });
 
-
+//
 
 // parse application/x-www-form-urlencoded
 app.use(bodyParser.urlencoded({ extended: true }));
@@ -69,8 +70,15 @@ app.use(express.static('public'));
 
 app.get('*', function(req, res, next){
   res.locals.cart = req.session.cart;
+  res.locals.user = req.user || null;
   next();
 });
+
+//Passport config
+require('./config/passport')(passport);
+//passport middleware
+app.use(passport.initialize());
+app.use(passport.session());
 
 //set routes
 var page = require('./routes/page.route');
@@ -79,13 +87,14 @@ var cart = require('./routes/cart.route');
 var adminPages = require('./routes/admin_pages.route');
 var adminCategories = require('./routes/admin_categories.route');
 var adminProducts = require('./routes/admin_products.route');
+var users = require('./routes/users.route');
 app.use('/cart', cart);
 app.use('/', page);
 app.use('/products', products);
 app.use('/admin/pages', adminPages);
 app.use('/admin/categories', adminCategories);
 app.use('/admin/products', adminProducts);
-
+app.use('/users', users);
 
 //start server
 app.listen(port, () => console.log(`App listening on ${port}`));

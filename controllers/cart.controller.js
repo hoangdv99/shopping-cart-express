@@ -89,3 +89,8 @@ module.exports.clearCart = (req, res)=>{
     delete req.session.cart;
     res.redirect('/cart/checkout');
 }
+
+module.exports.buyNow = (req, res)=>{
+    delete req.session.cart;
+    res.sendStatus(200);
+}

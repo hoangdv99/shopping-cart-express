@@ -1,0 +1,24 @@
+extends ../layouts/user.layout.pug
+block content
+    h1= title
+    if errors
+        each error in errors
+            .alert.alert-danger= error
+    form(action="/users/register", method="POST")
+        .form-group
+            label(for="name") Name
+            input#name.form-control(type="text", name="name", value=values?values.name:'')
+        .form-group
+            label(for="email") Email
+            input#email.form-control(type="text", name="email", value=values?values.email:'')      
+        .form-group
+            label(for="username") Username
+            input#username.form-control(type="text", name="username", value=values?values.username:'')   
+        .form-group
+            label(for="password") Password
+            input#password.form-control(type="password", name="password") 
+        .form-group
+            label(for="password2") Confirm password
+            input#password2.form-control(type="password", name="password2" )     
+        button.btn.btn-primary(type="submit") Register
+block footer

@@ -13,4 +13,7 @@ router.get('/update/:product', controller.updateProduct);
 
 //get clear cart
 router.get('/clear', controller.clearCart);
+
+//get buy now
+router.get('/buynow', controller.buyNow);
 module.exports = router;

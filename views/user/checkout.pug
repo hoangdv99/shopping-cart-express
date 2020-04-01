@@ -33,18 +33,38 @@ block content
                     b="Total: "+parseFloat(total).toFixed(2)+"$"
             tr
                 td(colspan="5" align="right")
-                    a(class="btn btn-danger confirmDelete" href="/cart/clear") Clear cart
+                    a(class="btn btn-danger confirmDelete clearcart" href="/cart/clear") Clear cart
                 td(colspan="5" align="right")
                     a(class="btn btn-primary buynow" href="#") Buy now
-                
+        input(type="hidden" name="cmd" value="_ext-enter")
+        form(class="paypal" action="https://www.sandbox.paypal.com/us/cgi-bin/webscr" method="post")
+            input(type="hidden" name="cmd" value="_cart")
+            input(type="hidden" name="business" value="hoangdv257@gmail.com")
+            input(type="hidden" name="upload" value="1")
+            - var num = 0
+            each product in cart
+                - num++
+                input(type="hidden" name="item_name_"+num value=product.title)
+                input(type="hidden" name="amount_"+num value=product.price)
+                input(type="hidden" name="quantity_"+num value=product.qty)
+            input(type="hidden" name="currency_code" value="USD")
+            input(type="hidden" name="amount" value=total)
+            input(type="image" src="http://www.paypal.com/en_US/i/btn/x-click-but01.gif" name="submit" alt="Make payments with PayPal - it's fast, free and secure!")       
     else
         h3.text-center Your cart is empty.
     script.
         $(function(){
-            $('a.clearcart').on('click', fucntion(){
+            $('a.clearcart').on('click', function(){
                 if(!confirm('Confirm Deletion')){
                     return false;
                 }
+            })
+            $('a.buynow').on('click', function(e){
+                e.preventDefault();
+                $.get('/cart/buynow', function(){
+                    $('form.paypal input[type=image]').click();
+                    $('.ajaxbg').show();
+                })
             })
         })
     

@@ -5,7 +5,12 @@ html
     link(rel="stylesheet", href="https://cdn.jsdelivr.net/gh/fancyapps/fancybox@3.5.7/dist/jquery.fancybox.min.css")
     link(rel="stylesheet", href="/style/custom.css")
     link(rel='stylesheet', href='https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css')
+    script(src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js")
   body
+    .ajaxbg
+      .ajaxinner
+        h3 You are now being redirected to paypal...
+        img(src="/images/ajax-loader.gif", alt="")
     nav.navbar.navbar-expand-md.navbar-dark.bg-dark.fixed-top
       a.navbar-brand(href='/') Shopping Pro
       button.navbar-toggler(type='button', data-toggle='collapse', data-target='#navbarsExampleDefault', aria-controls='navbarsExampleDefault', aria-expanded='false', aria-label='Toggle navigation')
@@ -26,6 +31,10 @@ html
                 span= " ("+cart.length+")"
               else
                 span= " (0)"
+          li(class="nav-item")
+            a.nav-link(href="/users/register") Register
+          li(class="nav-item")
+            a.nav-link(href="/users/login") Login
         
     .container.pt-5
     .container
@@ -43,7 +52,7 @@ html
           block content
     hr
     p.text-center &COPY; Shopping Pro
-    script(src="https://cdn.jsdelivr.net/npm/jquery@3.4.1/dist/jquery.min.js")
+    //script(src="https://cdn.jsdelivr.net/npm/jquery@3.4.1/dist/jquery.min.js")
     script(src="https://cdn.jsdelivr.net/gh/fancyapps/fancybox@3.5.7/dist/jquery.fancybox.min.js")
     script(src="https://cdn.ckeditor.com/4.13.1/standard/ckeditor.js")
     script(src="/js/main.js")
