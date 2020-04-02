@@ -1,0 +1,16 @@
+extends ../layouts/user.layout.pug
+block content
+    h1= title
+    if error
+        div.alert.alert-danger= error
+    if noti
+        div.alert.alert-success= noti
+    form(action="/users/login", method="POST")     
+        .form-group
+            label(for="username") Username
+            input#username.form-control(type="text", name="username")   
+        .form-group
+            label(for="password") Password
+            input#password.form-control(type="password", name="password") 
+        button.btn.btn-primary(type="submit") Login
+block footer

@@ -31,10 +31,17 @@ html
                 span= " ("+cart.length+")"
               else
                 span= " (0)"
-          li(class="nav-item")
-            a.nav-link(href="/users/register") Register
-          li(class="nav-item")
-            a.nav-link(href="/users/login") Login
+          if user
+            li 
+              a.nav-link(href="/users/logout")= 'Hi '+user.username+' Logout'
+          else  
+            li(class="nav-item")
+              a.nav-link(href="/users/register") Register
+            li(class="nav-item")
+              a.nav-link(href="/users/login") Login
+          if user && user.admin == 1
+            li 
+              a.nav-link(href="/admin/pages") Admin area
         
     .container.pt-5
     .container

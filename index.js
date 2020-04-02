@@ -9,6 +9,7 @@ var fileUpload = require('express-fileupload');
 var session = require('express-session');
 var passport = require('passport');
 
+
 app.use(fileUpload());
 //connect to mongodb
 mongoose.connect(config.database, {useNewUrlParser: true, useUnifiedTopology: true});
@@ -68,17 +69,18 @@ app.set('views', './views');
 //set public folder
 app.use(express.static('public'));
 
+//Passport config
+require('./config/passport')(passport);
+//passport middleware
+app.use(passport.initialize());
+app.use(passport.session());
+
 app.get('*', function(req, res, next){
   res.locals.cart = req.session.cart;
   res.locals.user = req.user || null;
   next();
 });
 
-//Passport config
-require('./config/passport')(passport);
-//passport middleware
-app.use(passport.initialize());
-app.use(passport.session());
 
 //set routes
 var page = require('./routes/page.route');
