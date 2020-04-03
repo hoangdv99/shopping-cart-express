@@ -23,7 +23,7 @@ html
                 a.nav-link(href="/")= page.title
             else
               li(class="nav-item")
-              a.nav-link(href= page.slug)= page.title
+                a.nav-link(href= '/'+page.slug)= page.title
         ul(class="navbar-nav navbar-right")
           li(class="nav-item")
             a.nav-link(href="/cart/checkout") My Cart

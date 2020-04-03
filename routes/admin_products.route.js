@@ -2,22 +2,22 @@ const express = require('express');
 const router = express.Router();
 const controller = require('../controllers/admin_products.controller');
 const validate = require('../validate/admin_product.validate');
-const Category = require('../models/category');
-const Product = require('../models/product');
-router.get('/', controller.getProductsIndex);
+var auth = require('../config/auth');
 
-router.get('/add-product', controller.getAddProduct);
+router.get('/', auth.isAdmin, controller.getProductsIndex);
+
+router.get('/add-product', auth.isAdmin, controller.getAddProduct);
 
 router.post('/add-product', validate.postAddProduct, controller.postAddProduct);
 
-router.get('/edit-product/:id', controller.getEditProduct);
+router.get('/edit-product/:id', auth.isAdmin, controller.getEditProduct);
 
 router.post('/edit-product/:id', validate.postEditProduct, controller.postEditProduct);
 
 router.post('/product-gallery/:id', controller.postGallery);
 
-router.get('/delete-image/:image', controller.deleteImage);
+router.get('/delete-image/:image', auth.isAdmin, controller.deleteImage);
 
-router.get('/delete-product/:id', controller.deleteProduct);
+router.get('/delete-product/:id', auth.isAdmin, controller.deleteProduct);
 
 module.exports = router;
