@@ -99,7 +99,6 @@ module.exports.postEditPage = (req, res) => {
     var slug = req.body.slug.replace(/\s+/g, '-').toLowerCase();;
     var content = req.body.content;
     var id = req.params.id;
-    var errors = [];
     Page.findById(id, (err, page) => {
         if (err) return console.log(err);
         page.title = title;
