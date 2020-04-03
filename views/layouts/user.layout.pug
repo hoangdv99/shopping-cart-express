@@ -12,7 +12,7 @@ html
         h3 You are now being redirected to paypal...
         img(src="/images/ajax-loader.gif", alt="")
     nav.navbar.navbar-expand-md.navbar-dark.bg-dark.fixed-top
-      a.navbar-brand(href='/') Shopping Pro
+      a.navbar-brand(href="/") Shopping Pro
       button.navbar-toggler(type='button', data-toggle='collapse', data-target='#navbarsExampleDefault', aria-controls='navbarsExampleDefault', aria-expanded='false', aria-label='Toggle navigation')
         span.navbar-toggler-icon
       #navbarsExampleDefault.collapse.navbar-collapse
@@ -24,7 +24,7 @@ html
             else
               li(class="nav-item")
               a.nav-link(href= page.slug)= page.title
-        ul(class="navbar-nav narbar-right mr-auto")
+        ul(class="navbar-nav navbar-right")
           li(class="nav-item")
             a.nav-link(href="/cart/checkout") My Cart
               if typeof cart !== "undefined"
@@ -33,7 +33,7 @@ html
                 span= " (0)"
           if user
             li 
-              a.nav-link(href="/users/logout")= 'Hi '+user.username+' Logout'
+              a.nav-link(href="/users/logout")= 'Hi '+user.username+' | Logout'
           else  
             li(class="nav-item")
               a.nav-link(href="/users/register") Register

@@ -21,7 +21,7 @@ module.exports.postRegister = (req, res)=>{
         email: email,
         username: username,
         password: password,
-        admin: 1
+        admin: 0
     });
 
     bcrypt.genSalt(10, function(err, salt){
@@ -54,20 +54,26 @@ module.exports.getLogin = (req, res)=>{
     });
 }
 
-module.exports.postLogin = (req, res, next)=>{
-    passport.authenticate('local', function(err, user, info){
-        if(err){
+module.exports.postLogin = (req, res, next) => {
+    passport.authenticate('local', function (err, user, info) {
+        if (err) {
             console.log(err);
         }
-        if(!user){
+        if (!user) {
             res.render('user/login', {
-                title: "Login",
-                error: "Wrong username or password!"
+                title: 'Login',
+                error: 'Wrong username or password!'
             });
-        }else{
-            res.render('index.pug', {
-                user: user
-            })
         }
     })(req, res, next);
+
+    passport.authenticate('local', {
+        successRedirect: '/'
+    })(req, res, next);
+}
+
+module.exports.getLogout = (req, res)=>{
+    delete req.session.cart;
+    req.logout();
+    res.redirect('/users/login');
 }

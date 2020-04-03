@@ -30,6 +30,7 @@ module.exports.getProductsByCategory = (req, res)=>{
 
 module.exports.getProductDetails = (req, res)=>{
     var galleryImages = null;
+    var loggedIn = req.isAuthenticated() ? true : false;
     Product.findOne({slug: req.params.product}, (err, product)=>{
         if(err){
             console.log(err);
@@ -47,7 +48,8 @@ module.exports.getProductDetails = (req, res)=>{
                     res.render('user/product', {
                         title: product.title,
                         product: product,
-                        galleryImages: galleryImages
+                        galleryImages: galleryImages,
+                        loggedIn: loggedIn
                     })
                 }
             });
