@@ -7,5 +7,5 @@ block content
                     img(class="pimage", src="/product_images/"+product._id+"/"+product.image)
                 h3= product.title
                 h4= parseFloat(product.price).toFixed(2)+"$"
-                a(class="vd", href="/products/"+product.category+"/"+product.slug) View Details
+                a(class="vd btn btn-primary", href="/products/"+product.category+"/"+product.slug) View Details
 block footer

@@ -1,6 +1,7 @@
 html
   head
     title Shopping Pro
+    link(rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css")
     link(rel="stylesheet", href="/style/custom.css")
     link(rel='stylesheet', href='https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css')
     
@@ -19,7 +20,8 @@ html
             a.nav-link(href= "/admin/products") Products
         ul(class="navbar-nav navbar-right")
           li 
-            a.nav-link(href="/users/logout") Logout
+            a.nav-link(href="/users/logout") Logout 
+              i(class="fa fa-sign-out")
     .container.pt-5
     block content
     

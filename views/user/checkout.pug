@@ -1,6 +1,7 @@
 extends ../layouts/user.layout.pug
 block content
-    h1.page-title My Cart
+    h1.page-title My Cart 
+        i(class="fa fa-shopping-cart")
     if typeof cart !== 'undefined'
         table(class="table table-striped alignmiddle")
             tr
@@ -21,11 +22,13 @@ block content
                     td= product.qty
                     td
                         a(href=`/cart/update/${product.title}?action=add`)
-                            button(class="button button-primary") +
+                            button(class="btn")
+                                i(class="fa fa-plus")
                         a(href=`/cart/update/${product.title}?action=remove`)
-                            button(class="button button-primary") -
+                            button(class="btn")
+                                i(class="fa fa-minus")
                         a(href=`/cart/update/${product.title}?action=clear`) 
-                            button(class="button button-primary") Clear
+                            button(class="btn btn-danger") Clear
                     td= parseFloat(product.qty * product.price).toFixed(2) + "$"
                     td
             tr 

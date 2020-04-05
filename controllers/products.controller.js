@@ -2,16 +2,21 @@ var Product = require('../models/product');
 var Category = require('../models/category');
 var fs = require('fs-extra');
 
-module.exports.getAllProducts = (req, res) => {
-    Product.find((err, products)=>{
-        if(err)
-            console.log(err);
+module.exports.getAllProducts = async (req, res) => {
+    // Product.find({}, (err, products)=>{
+    //     if(err)
+    //         console.log(err);
         
-        res.render('user/all_products', {
-            title: 'All products',
-            products: products
-        });
+    //     res.render('user/all_products', {
+    //         title: 'All products',
+    //         products: products
+    //     });
     
+    // });
+    var products = await Product.find();
+    res.render('user/all_products', {
+        products: products,
+        title: "Products"
     });
 }
 

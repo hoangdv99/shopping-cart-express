@@ -8,11 +8,11 @@ block content
             img.spi(src="/product_images/"+product._id+"/"+product.image)
             br
         div(class=".col-xs-12 col-md-7")
-            p= product.desc
+            div!= product.desc
             p= parseFloat(product.price).toFixed(2)+"$"
             if loggedIn
                 p
-                    a(href="/cart/add/"+product.slug) Add to cart
+                    a(class="btn btn-primary" href="/cart/add/"+product.slug) Add to cart
             else
                 p You must to be logged in to purchase items
         div(class="col-xs-12")
