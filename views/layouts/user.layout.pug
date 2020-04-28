@@ -21,10 +21,20 @@ html
           each page in pages
             if page.slug == "home"
               li(class="nav-item")
-                a.nav-link(href="/")= page.title+" |"
+                a.nav-link(href="/")= page.title
             else
               li(class="nav-item")
-                a.nav-link(href= '/'+page.slug)= page.title+" |"
+                a.nav-link(href= '/'+page.slug)= page.title
+        ul(class="navbar-nav navbar-center")
+          .container.h-100
+            .d-flex.justify-content-center.h-100
+              .searchbar
+                input(class="search_input", type="text", name="", placeholder="Search...")
+                a(href="#", class="search_icon")
+                  i(class="fa fa-search")
+              </div>
+            </div>
+          </div>
         ul(class="navbar-nav navbar-right margin-auto")
           li(class="nav-item")
             a.nav-link(href="/cart/checkout") My Cart 
@@ -62,7 +72,7 @@ html
         div(class="col-xs-12 col-md-8")
           block content
     hr
-    p.text-center &COPY; Shopping Pro
+
     //script(src="https://cdn.jsdelivr.net/npm/jquery@3.4.1/dist/jquery.min.js")
     script(src="https://cdn.jsdelivr.net/gh/fancyapps/fancybox@3.5.7/dist/jquery.fancybox.min.js")
     script(src="https://cdn.ckeditor.com/4.13.1/standard/ckeditor.js")
